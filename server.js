@@ -30,7 +30,18 @@ app.post('/cek', async (req, res) => {
 });
 
 const wa = require('@open-wa/wa-automate');
+const fs = require('fs');
+
+const chromePaths = [
+  '/usr/bin/google-chrome',
+  '/usr/bin/chromium-browser',
+  '/usr/bin/chromium',
+];
+
+const chromePath = chromePaths.find(fs.existsSync);
+
 wa.create({
+  executablePath: chromePath,
   headless: true,
   args: ['--no-sandbox', '--disable-setuid-sandbox'],
 }).then(client => {
