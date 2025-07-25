@@ -33,8 +33,10 @@ app.post('/cek', async (req, res) => {
 
 wa.create({
   headless: true,
-  args: ['--no-sandbox', '--disable-setuid-sandbox']
-}).then((client) => {
+  args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  executablePath: require('puppeteer').executablePath()
+})
+.then((client) => {
   global.client = client;
   app.listen(PORT, () => {
     console.log(`✅ Server running di http://localhost:${PORT}`);
