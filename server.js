@@ -31,14 +31,10 @@ app.post('/cek', async (req, res) => {
   }
 });
 
+const puppeteer = require('puppeteer');
 wa.create({
   headless: true,
   args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  executablePath: require('puppeteer').executablePath()
+  executablePath: puppeteer.executablePath()
 })
-.then((client) => {
-  global.client = client;
-  app.listen(PORT, () => {
-    console.log(`✅ Server running di http://localhost:${PORT}`);
-  });
-});
+
