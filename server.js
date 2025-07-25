@@ -1,8 +1,6 @@
 const express = require('express');
 const fs = require('fs');
-const path = require('path');
 const cekNomor = require('./bot');
-const wa = require('@open-wa/wa-automate');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -31,10 +29,13 @@ app.post('/cek', async (req, res) => {
   }
 });
 
-const puppeteer = require('puppeteer');
+const wa = require('@open-wa/wa-automate');
 wa.create({
   headless: true,
   args: ['--no-sandbox', '--disable-setuid-sandbox'],
-  executablePath: puppeteer.executablePath()
-})
-
+}).then(client => {
+  global.client = client;
+  app.listen(PORT, () => {
+    console.log(`✅ Server running di http://localhost:${PORT}`);
+  });
+});
