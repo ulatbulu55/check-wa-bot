@@ -7,4 +7,4 @@ services:
     plan: free
     envVars:
       - key: PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
-        value: "false"
+        value: "true"
